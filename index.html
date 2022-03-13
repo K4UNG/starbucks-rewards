@@ -46,7 +46,7 @@
             <a href="#">Or join online</a>
         </section>
 
-        <section>
+        <section class="started">
             <h2>Getting started is easy</h2>
             <p>Earn Stars and get rewarded in a few easy steps.</p>
 
@@ -71,17 +71,20 @@
         </section>
 
         <section class="rewards">
-            <div class="tabs">
+            <div class="rewards-text">
                 <h2>Get your favorites for free</h2>
                 <ul>
-                    <li><button>25 <span>★</span></button></li>
-                    <li><button>50 <span>★</span></button></li>
-                    <li><button>150 <span>★</span></button></li>
-                    <li><button>200 <span>★</span></button></li>
-                    <li><button>400 <span>★</span></button></li>
+                    <li><button class="active" data-dis="0">25 <span>★</span></button></li>
+                    <li><button data-dis="1">50 <span>★</span></button></li>
+                    <li><button data-dis="2">150 <span>★</span></button></li>
+                    <li><button data-dis="3">200 <span>★</span></button></li>
+                    <li><button data-dis="4">400 <span>★</span></button></li>
                 </ul>
+                <div class="indicator"></div>
+            </div>
 
-                <div class="container-reward">
+            <div class="tabs">
+                <div class="container-reward active-tab">
                     <img src="images/reward-1.webp" alt="reward image">
                     <h3>Customize your drink</h3>
                     <p>Make your drink just right with an extra espresso shot, dairy substitute or a dash of your favorite syrup.</p>
