@@ -96,11 +96,9 @@ closeBtns.forEach(close => {
     close.onclick = () => {
         close.parentElement.parentElement.classList.remove('modal-shown');
         document.body.classList.remove('stop-scroll');
-        close.nextElementSibling.style.transform = 'translateX(0)';
-        close.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.style.opacity = '0';
-        close.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.style['pointer-events'] = 'none';
-        close.nextElementSibling.nextElementSibling.lastChild.previousElementSibling.style.opacity = '1';
-        close.nextElementSibling.nextElementSibling.lastChild.previousElementSibling.style['pointer-events'] = 'all';
+        close.parentElement.parentElement.addEventListener('transitionend', () => {
+            reset(close);
+        }, {once: true})
         
         removeDot();
         dots.forEach(dot => {
@@ -189,6 +187,14 @@ function checkArrow(parent, active) {
         parent.nextElementSibling.style['pointer-events'] = 'all'
         parent.previousElementSibling.style['pointer-events'] = 'all';
     }
+}
+
+function reset(close) {
+    close.nextElementSibling.style.transform = 'translateX(0)';
+    close.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.style.opacity = '0';
+    close.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.style['pointer-events'] = 'none';
+    close.nextElementSibling.nextElementSibling.lastChild.previousElementSibling.style.opacity = '1';
+    close.nextElementSibling.nextElementSibling.lastChild.previousElementSibling.style['pointer-events'] = 'all';
 }
 
 function hideLeft() {

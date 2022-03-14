@@ -452,6 +452,7 @@ nav button:last-child:hover {
     position: relative;
     max-width: 500px;
     margin: auto;
+    overflow-x: hidden;
 }
 
 .rewards-text h2 {
@@ -682,4 +683,59 @@ nav button:last-child:hover {
     background: none;
     cursor: pointer;
     z-index: 105;
+}
+
+/* ==========earn section========== */
+
+.earn {
+    background: var(--light-orange);
+    padding: 3em 1em;
+}
+
+.earn img {
+    max-width: 100px;
+}
+
+.earn>h2 {
+    text-align: center;
+    font-size: var(--medium-plus);
+}
+
+.earn>p {
+    text-align: center;
+    font-size: var(--small);
+    margin: 1.5em 0 3em;
+}
+
+.earn hr {
+    margin: 1em 0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 100px auto;
+    grid-column-gap: 1em;
+    margin: 1.5em 0;
+}
+
+.earn-header {
+    margin: 2em 0;
+}
+
+.earn-header h3 {
+    font-size: var(--medium);
+    margin: .3em 0;
+}
+
+.earn-header p {
+    font-size: var(--small);
+    font-weight: 600;
+}
+
+.container-text p {
+    margin-top: .4em;
+}
+
+.container-text a:hover {
+    text-decoration: none;
 }
