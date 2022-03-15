@@ -63,7 +63,7 @@ function changeIndicator() {
                 left += buttons[i].offsetWidth
             }
             indicator.style.transform = `translateX(${left}px)`;
-            indicator.style.width = button.offsetWidth + 'px';
+            indicator.style.width = button.clientWidth + 'px';
             return;
         }
     })
@@ -334,7 +334,7 @@ function setNavIndicator() {
     const active = document.querySelector('.top-nav ul li:nth-child(2)');
     const indicator = document.querySelector('.nav-indicator');
     indicator.style.left = active.offsetLeft + 'px';
-    indicator.style.width = active.offsetWidth + 'px';
+    indicator.style.width = active.clientWidth + 'px';
 }
 
 setNavIndicator();
