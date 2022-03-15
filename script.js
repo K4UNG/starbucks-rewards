@@ -4,6 +4,8 @@ const menuIcon = document.querySelector('.menu');
 
 const filter = document.querySelector('.filter');
 
+
+// ==========Menu button========
 menuBtn.onclick = () => {
     menu.classList.toggle('shown');
     menuIcon.classList.toggle('burger');
@@ -18,6 +20,7 @@ menuBtn.onclick = () => {
     }
 }
 
+// ===============overlay background=========
 filter.onclick = () => {
     menu.classList.toggle('shown');
     menuIcon.classList.toggle('burger');
@@ -26,6 +29,8 @@ filter.onclick = () => {
     filter.style.opacity = '0';
     filter.style['pointer-events'] = 'none';
 }
+
+// =============tabs=============
 
 const buttons = document.querySelectorAll('.rewards button');
 const indicator = document.querySelector('.indicator');
@@ -66,17 +71,22 @@ function changeIndicator() {
 
 changeIndicator();
 
-window.onresize = changeIndicator;
+window.onresize = changeIndicator; // adjust on screen resize
 
-const images = document.querySelectorAll('.extra-btn');
-const closeBtns = document.querySelectorAll('.close');
-const learn = document.querySelectorAll('.extra-text button');
+// ============popups==============
 
+const images = document.querySelectorAll('.extra-btn'); // images
+const closeBtns = document.querySelectorAll('.close'); // close btn
+const learn = document.querySelectorAll('.extra-text button'); // Learn more button
+
+// modals
 const modals = {
     0: document.getElementById('modal-1'),
     1: document.getElementById('modal-2'),
     2: document.getElementById('modal-3')
 }
+
+// show/hide modal
 
 images.forEach(image => {
     image.onclick = () => {
@@ -94,6 +104,7 @@ learn.forEach(lrn => {
 
 closeBtns.forEach(close => {
     close.onclick = () => {
+        // hide modal and move back to first slider element
         close.parentElement.parentElement.classList.remove('modal-shown');
         document.body.classList.remove('stop-scroll');
         close.parentElement.parentElement.addEventListener('transitionend', () => {
@@ -110,6 +121,7 @@ closeBtns.forEach(close => {
     }
 })
 
+// slider nav buttons
 const dots = document.querySelectorAll('.slider-nav button');
 
 dots.forEach(dot => {
@@ -121,12 +133,14 @@ dots.forEach(dot => {
     }
 })
 
+// remove active for all nav buttons
 function removeDot() {
     dots.forEach(dot => {
         dot.classList.remove('active-btn');
     })
 }
 
+// slider mover
 function moveSlider(slider, dis) {
     slider.style.transform = `translateX(-${100 * dis}%)`;
 }
@@ -134,6 +148,8 @@ function moveSlider(slider, dis) {
 const leftBtns = document.querySelectorAll('.left');
 const rightBtns = document.querySelectorAll('.right');
 
+
+// -----left and right button / hide and show depending on position and move the slider
 leftBtns.forEach(left => {
     left.onclick = () => {
         let dis;
@@ -166,6 +182,8 @@ rightBtns.forEach(right => {
     }
 })
 
+
+// decide if the left/right button should be visible or not
 function checkArrow(parent, active) {
     if (active == (parent.parentElement.previousElementSibling.childElementCount - 1)) {
         parent.nextElementSibling.style.opacity = '0'
@@ -189,19 +207,84 @@ function checkArrow(parent, active) {
     }
 }
 
+// reset left and right buttons to default state on close
 function reset(close) {
     close.nextElementSibling.style.transform = 'translateX(0)';
-    close.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.style.opacity = '0';
-    close.nextElementSibling.nextElementSibling.firstChild.nextElementSibling.style['pointer-events'] = 'none';
-    close.nextElementSibling.nextElementSibling.lastChild.previousElementSibling.style.opacity = '1';
-    close.nextElementSibling.nextElementSibling.lastChild.previousElementSibling.style['pointer-events'] = 'all';
+    close.nextElementSibling.nextElementSibling.querySelector('.left').style.opacity = '0';
+    close.nextElementSibling.nextElementSibling.querySelector('.left').style['pointer-events'] = 'none';
+    close.nextElementSibling.nextElementSibling.querySelector('.right').style.opacity = '1';
+    close.nextElementSibling.nextElementSibling.querySelector('.right').style['pointer-events'] = 'all';
 }
 
-function hideLeft() {
+// hide left button on load
+(function() {
     leftBtns.forEach(left => {
         left.style.opacity = '0';
         left.style['pointer-events'] = 'none';
     })
+})();
+
+
+// =============== code input ============
+
+const input = document.querySelector('.input input');
+const inputContainer = document.querySelector('.input');
+
+input.onfocus = () => {
+    inputContainer.classList.add('moved');
 }
 
-hideLeft();
+input.addEventListener('focusout', () => {
+    if (!input.value) {
+        inputContainer.classList.remove('moved');
+        input.style['border-color'] = 'red';
+        inputContainer.style.color = 'red';
+        warning.style.height = '15px';
+    }
+});
+
+const warning = document.querySelector('.warn');
+
+input.onkeyup = () => {
+    if (input.value) {
+        input.style['border-color'] = 'var(--green)';
+        inputContainer.style.color = 'var(--green)';
+        warning.style.height = '0';
+    } else {
+        input.style['border-color'] = 'red';
+        inputContainer.style.color = 'red';
+        warning.style.height = '1em';
+    }
+}
+
+const pulseWrapper = document.querySelector('.pulse-wrapper');
+
+inputContainer.onclick = (e) => {
+    let xPos = e.clientX - inputContainer.offsetLeft;
+    let yPos = e.pageY - inputContainer.offsetTop;
+    let pulse = document.createElement('span');
+    pulse.style.left = xPos + 'px';
+    pulse.style.top = yPos + 'px';
+    pulse.classList.add('pulse');
+    pulseWrapper.append(pulse);
+    setTimeout(() => { pulseWrapper.removeChild(pulse)}, 500)
+}
+
+inputContainer.closest('form').onsubmit = () => {
+    return false;
+}
+
+// dropdowns
+
+const dropdownBtns = document.querySelectorAll('.dropdown-head');
+
+dropdownBtns.forEach(btn => {
+    btn.onclick = () => {
+        btn.querySelector('button').classList.toggle('spin');
+        if (btn.querySelector('button').classList.contains('spin')) {
+            btn.nextElementSibling.style.height = btn.nextElementSibling.querySelector('ul').offsetHeight + 'px';
+        } else {
+            btn.nextElementSibling.style.height = '0px';
+        }
+    }
+})
