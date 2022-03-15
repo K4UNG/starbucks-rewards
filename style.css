@@ -44,6 +44,10 @@ a {
     overflow: hidden;
 }
 
+svg {
+    pointer-events: none;
+}
+
 /* =======header======= */
 
 body {
@@ -279,7 +283,8 @@ nav button:first-of-type {
     border: 1px solid black;
 }
 
-nav button:first-of-type:hover {
+nav button:first-of-type:hover,
+button[type="submit"]:hover {
     background: #0001;
 }
 
@@ -822,12 +827,13 @@ input:focus {
 
 button[type="submit"] {
     margin-left: auto;
-    padding: .5em .8em;
+    padding: .4em .8em;
     border-radius: 20px;
-    border: 1px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.4);
     background: none;
     display: block;
     margin-top: 1em;
+    cursor: pointer;
 }
 
 .pulse {
