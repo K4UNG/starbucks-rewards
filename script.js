@@ -331,7 +331,7 @@ changeText();
 window.onresize = changeText;
 
 function setNavIndicator() {
-    const active = document.querySelector('.top-nav ul li:nth-child(2)');
+    const active = document.querySelector('.top-nav .active-nav');
     const indicator = document.querySelector('.nav-indicator');
     indicator.style.left = active.offsetLeft + 'px';
     indicator.style.width = active.offsetWidth + 'px';
