@@ -38,6 +38,11 @@ ul {
 a {
     color: var(--green);
     font-weight: 500;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
 .stop-scroll {
@@ -951,11 +956,13 @@ button[type="submit"] {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .dropdown-head h2 {
     font-weight: 500;
     font-size: var(--medium);
+    -webkit-tap-highlight-color: tran;
 }
 
 .dropdown-head button {
