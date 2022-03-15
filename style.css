@@ -1138,6 +1138,7 @@ button[type="submit"] {
         position: absolute;
         background: var(--green);
         bottom: 0;
+        width: 75px;
         display: unset;
     }
 

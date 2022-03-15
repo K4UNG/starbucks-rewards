@@ -334,7 +334,6 @@ function setNavIndicator() {
     const active = document.querySelector('.top-nav .active-nav');
     const indicator = document.querySelector('.nav-indicator');
     indicator.style.left = active.offsetLeft + 'px';
-    indicator.style.width = active.offsetWidth + 'px';
 }
 
 setNavIndicator();
