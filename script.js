@@ -121,6 +121,25 @@ closeBtns.forEach(close => {
     }
 })
 
+document.querySelectorAll('.ok').forEach(ok => {
+    ok.onclick = () => {
+        // hide modal and move back to first slider element
+        ok.parentElement.parentElement.classList.remove('modal-shown');
+        document.body.classList.remove('stop-scroll');
+        ok.parentElement.parentElement.addEventListener('transitionend', () => {
+            reset(ok.parentElement.querySelector('.close'));
+        }, {once: true})
+        
+        removeDot();
+        dots.forEach(dot => {
+            if (dot.dataset.img == 0) {
+                dot.classList.add('active-btn');
+            }
+        })
+        ok.previousElementSibling.querySelector('.slider-nav button:first-child').classList.add('active-btn');
+    }
+})
+
 // slider nav buttons
 const dots = document.querySelectorAll('.slider-nav button');
 
@@ -191,6 +210,7 @@ function checkArrow(parent, active) {
 
         parent.nextElementSibling.style['pointer-events'] = 'none'
         parent.previousElementSibling.style['pointer-events'] = 'all';
+        parent.closest('.modal-container').querySelector('.ok').style.display = 'unset';
         
     } else if (active == 0) {
         parent.previousElementSibling.style.opacity = '0';
@@ -198,17 +218,20 @@ function checkArrow(parent, active) {
 
         parent.nextElementSibling.style['pointer-events'] = 'all'
         parent.previousElementSibling.style['pointer-events'] = 'none';
+        parent.closest('.modal-container').querySelector('.ok').style.display = 'none';
     } else {
         parent.previousElementSibling.style.opacity = '1';
         parent.nextElementSibling.style.opacity = '1';
 
         parent.nextElementSibling.style['pointer-events'] = 'all'
         parent.previousElementSibling.style['pointer-events'] = 'all';
+        parent.closest('.modal-container').querySelector('.ok').style.display = 'none';
     }
 }
 
 // reset left and right buttons to default state on close
 function reset(close) {
+    document.querySelectorAll('.ok').forEach(ok => { ok.style.display = 'none'});
     close.nextElementSibling.style.transform = 'translateX(0)';
     close.nextElementSibling.nextElementSibling.querySelector('.left').style.opacity = '0';
     close.nextElementSibling.nextElementSibling.querySelector('.left').style['pointer-events'] = 'none';
@@ -288,3 +311,31 @@ dropdownBtns.forEach(btn => {
         }
     }
 })
+
+function changeText() {
+    const link = document.querySelector('.hero a');
+    const startedOne = document.querySelector('.container-started');
+    if (document.body.clientWidth >= '770') {
+        link.textContent = 'Join in the app'
+        startedOne.querySelector('h3').textContent = 'Create an account'
+        startedOne.querySelector('p').innerHTML = `To get started, <a href='#'>join now.</a> You can also <a href='#'>join in the app</a> to get access to the full range of Starbucks® Rewards benefits.`;
+    } else  {
+        link.textContent = 'Or join online'
+        startedOne.querySelector('h3').textContent = 'Download the Starbucks® app';
+        startedOne.querySelector('p').innerHTML = `<a href='#'>Join in the app</a> to get access to the full range of Starbucks® Rewards benefits. 
+        You can also <a href='#'>join online</a>.`;
+    }
+}
+
+changeText();
+window.onresize = changeText;
+
+function setNavIndicator() {
+    const active = document.querySelector('.top-nav ul li:nth-child(2)');
+    const indicator = document.querySelector('.nav-indicator');
+    indicator.style.left = active.offsetLeft + 'px';
+    indicator.style.width = active.offsetWidth + 'px';
+}
+
+setNavIndicator();
+window.onresize = setNavIndicator;
