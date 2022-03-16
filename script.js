@@ -71,7 +71,11 @@ function changeIndicator() {
 
 changeIndicator();
 
-window.onresize = changeIndicator; // adjust on screen resize
+window.onresize = () => {
+    changeIndicator();
+    setNavIndicator();
+    changeText();
+} // adjust on screen resize
 
 // ============popups==============
 
@@ -328,7 +332,6 @@ function changeText() {
 }
 
 changeText();
-window.onresize = changeText;
 
 function setNavIndicator() {
     const active = document.querySelector('.top-nav .active-nav');
@@ -337,4 +340,3 @@ function setNavIndicator() {
 }
 
 setNavIndicator();
-window.onresize = setNavIndicator;
