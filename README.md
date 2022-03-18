@@ -1,6 +1,6 @@
 # Starbucks Rewards page clone
 
-**[Live Demo](https://k4ung-starbucks.netlify.app/)**
+# **[Live Demo](https://k4ung-starbucks.netlify.app/)**
 
 ### built with
 - HTML5
